@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: testpilot-postgres
+    environment:
+      POSTGRES_DB: testpilot
+      POSTGRES_USER: testpilot
+      POSTGRES_PASSWORD: testpilot
+    ports:
+      - "5432:5432"
+    volumes:
+      - testpilot-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U testpilot -d testpilot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  testpilot-pgdata:

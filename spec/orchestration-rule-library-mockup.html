@@ -1,0 +1,314 @@
+<div id="orchestration-rule-mockup">
+  <style>
+    #orchestration-rule-mockup { color:#202b3a; font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    #orchestration-rule-mockup * { box-sizing:border-box; }
+    #orchestration-rule-mockup [hidden] { display:none !important; }
+    #orchestration-rule-mockup .app { display:grid; grid-template-columns:220px minmax(0,1fr); min-height:700px; background:#f5f7fa; border:1px solid #e0e5ec; border-radius:12px; overflow:hidden; }
+    #orchestration-rule-mockup aside { background:#172235; border-right:1px solid #26344a; padding:22px 13px; }
+    #orchestration-rule-mockup .brand { font-size:18px; font-weight:650; padding:0 12px 28px; color:#f4f7fb; }
+    #orchestration-rule-mockup nav { display:grid; gap:5px; }
+    #orchestration-rule-mockup nav button { border:0; background:transparent; color:#c0cad8; font:inherit; text-align:left; padding:10px 12px; border-radius:7px; cursor:pointer; }
+    #orchestration-rule-mockup nav button.active { color:#fff; background:#2b4163; font-weight:600; }
+    #orchestration-rule-mockup .profile { margin-top:265px; padding:15px 12px 0; border-top:1px solid #344156; color:#c0cad8; }
+    #orchestration-rule-mockup .main { min-width:0; }
+    #orchestration-rule-mockup .topbar { height:58px; background:#fff; border-bottom:1px solid #e3e8ef; display:flex; align-items:center; justify-content:space-between; padding:0 28px; color:#687486; }
+    #orchestration-rule-mockup .content { padding:25px 28px; }
+    #orchestration-rule-mockup h1 { font-size:21px; letter-spacing:-.3px; margin:0; color:#182230; }
+    #orchestration-rule-mockup h2 { font-size:16px; margin:0; color:#202b3a; }
+    #orchestration-rule-mockup h3 { font-size:14px; margin:0; color:#263346; }
+    #orchestration-rule-mockup button { font:inherit; cursor:pointer; }
+    #orchestration-rule-mockup input, #orchestration-rule-mockup select, #orchestration-rule-mockup textarea { width:100%; margin-top:6px; border:1px solid #dbe2eb; border-radius:6px; padding:9px 10px; color:#394658; background:#fff; font:inherit; font-size:13px; }
+    #orchestration-rule-mockup input[type=file] { padding:8px; }
+    #orchestration-rule-mockup .btn { border:1px solid #d6dee8; background:#fff; color:#394658; padding:8px 12px; border-radius:7px; }
+    #orchestration-rule-mockup .btn.primary { background:#245edb; color:#fff; border-color:#245edb; }
+    #orchestration-rule-mockup .btn.link { border:0; background:transparent; color:#245edb; padding:5px 6px; }
+    #orchestration-rule-mockup .btn.danger { color:#b4434d; }
+    #orchestration-rule-mockup .btn:disabled { cursor:not-allowed; opacity:.42; }
+    #orchestration-rule-mockup .filters { background:#fff; padding:15px 16px; display:flex; align-items:end; gap:11px; border:1px solid #e2e7ee; border-radius:9px; margin-bottom:14px; }
+    #orchestration-rule-mockup .filters label { color:#596679; font-size:12px; min-width:180px; }
+    #orchestration-rule-mockup .filters input, #orchestration-rule-mockup .filters select { margin-top:6px; }
+    #orchestration-rule-mockup .list-head { display:flex; justify-content:space-between; align-items:center; padding:11px 15px; background:#fff; border:1px solid #e2e7ee; border-bottom:0; border-radius:9px 9px 0 0; }
+    #orchestration-rule-mockup .list { background:#fff; border:1px solid #e2e7ee; border-radius:0 0 9px 9px; overflow:hidden; }
+    #orchestration-rule-mockup .row { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(110px,.75fr) minmax(110px,.7fr) minmax(180px,1fr); gap:12px; align-items:center; padding:14px 17px; border-bottom:1px solid #edf0f4; }
+    #orchestration-rule-mockup .row:last-child { border-bottom:0; }
+    #orchestration-rule-mockup .row.head { background:#fafbfd; color:#798494; font-size:12px; }
+    #orchestration-rule-mockup .rule-name { font-weight:600; color:#273346; }
+    #orchestration-rule-mockup .meta { color:#778394; font-size:12px; margin-top:3px; }
+    #orchestration-rule-mockup .actions { display:flex; align-items:center; gap:4px; white-space:nowrap; }
+    #orchestration-rule-mockup .actions .locked { color:#9aa4b1; cursor:not-allowed; }
+    #orchestration-rule-mockup .pagefoot { color:#7e8998; font-size:12px; padding:13px 3px; }
+    #orchestration-rule-mockup .panel { background:#fff; border:1px solid #e1e6ed; border-radius:9px; padding:21px; margin-top:16px; }
+    #orchestration-rule-mockup .panel-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+    #orchestration-rule-mockup .back { color:#526176; border:0; background:transparent; padding:0 0 16px; }
+    #orchestration-rule-mockup .field-label { display:block; color:#536174; font-size:12px; }
+    #orchestration-rule-mockup .basics { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+    #orchestration-rule-mockup .full { grid-column:1/-1; }
+    #orchestration-rule-mockup textarea { resize:vertical; min-height:66px; }
+    #orchestration-rule-mockup .section-title { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:20px 0 10px; }
+    #orchestration-rule-mockup .section-title small { color:#7b8797; }
+    #orchestration-rule-mockup .source-tabs { display:flex; gap:5px; padding:4px; background:#f0f3f7; border-radius:7px; }
+    #orchestration-rule-mockup .source-tabs button { border:0; background:transparent; color:#637084; padding:7px 12px; border-radius:5px; }
+    #orchestration-rule-mockup .source-tabs button.active { color:#245edb; background:#fff; box-shadow:0 1px 4px #1c2b421c; font-weight:600; }
+    #orchestration-rule-mockup .source-panel { border:1px solid #e2e7ee; border-radius:8px; padding:14px; background:#fbfcfe; }
+    #orchestration-rule-mockup .manual-entry { display:grid; grid-template-columns:130px minmax(180px,1fr) minmax(190px,1.2fr) auto; gap:10px; align-items:end; }
+    #orchestration-rule-mockup .entry-help { color:#7b8797; font-size:12px; margin:0 0 10px; }
+    #orchestration-rule-mockup .ai-upload { display:grid; grid-template-columns:minmax(200px,1fr) auto auto; align-items:end; gap:10px; }
+    #orchestration-rule-mockup .upload-note { color:#7b8797; font-size:12px; margin-top:8px; }
+    #orchestration-rule-mockup .flow-box { border:1px solid #e2e7ee; border-radius:8px; overflow:hidden; }
+    #orchestration-rule-mockup .flow-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 14px; background:#fafbfd; border-bottom:1px solid #edf0f4; }
+    #orchestration-rule-mockup .flow-head small { color:#7b8797; }
+    #orchestration-rule-mockup .step-list { min-height:72px; padding:6px 14px; }
+    #orchestration-rule-mockup .step { display:flex; align-items:center; gap:11px; padding:12px 2px; border-bottom:1px solid #f0f2f5; }
+    #orchestration-rule-mockup .step:last-child { border-bottom:0; }
+    #orchestration-rule-mockup .step.dragging { opacity:.45; }
+    #orchestration-rule-mockup .step.drag-target { box-shadow:inset 0 2px #7399ec; background:#eef4ff; }
+    #orchestration-rule-mockup .grip { color:#9aa4b1; cursor:grab; user-select:none; }
+    #orchestration-rule-mockup .step-num { color:#245edb; font-weight:700; min-width:18px; }
+    #orchestration-rule-mockup .method { color:#27794e; background:#e8f6ed; font-size:10px; font-weight:700; padding:3px 5px; border-radius:4px; margin-right:7px; }
+    #orchestration-rule-mockup .method.post { color:#9b5b0d; background:#fff2df; }
+    #orchestration-rule-mockup .step-main { min-width:0; flex:1; }
+    #orchestration-rule-mockup .step-main code { overflow-wrap:anywhere; }
+    #orchestration-rule-mockup .step-main small { display:block; color:#7b8797; font-size:12px; margin-top:3px; }
+    #orchestration-rule-mockup .step-remove { border:0; background:transparent; color:#9aa4b1; padding:4px 7px; }
+    #orchestration-rule-mockup .empty-steps { color:#8792a1; text-align:center; padding:22px 10px; }
+    #orchestration-rule-mockup .editor-footer { display:flex; align-items:center; justify-content:space-between; margin-top:17px; }
+    #orchestration-rule-mockup .editor-footer small { color:#7b8797; }
+    #orchestration-rule-mockup .detail-card { background:#fff; border:1px solid #e1e6ed; border-radius:9px; overflow:hidden; margin-bottom:14px; }
+    #orchestration-rule-mockup .detail-title { padding:13px 16px; border-bottom:1px solid #edf0f4; color:#354256; font-weight:600; }
+    #orchestration-rule-mockup .detail-body { padding:16px; }
+    #orchestration-rule-mockup .detail-step { display:flex; gap:11px; padding:11px 0; border-bottom:1px solid #edf0f4; }
+    #orchestration-rule-mockup .detail-step:last-child { border-bottom:0; }
+    #orchestration-rule-mockup .toast { position:fixed; right:22px; bottom:22px; background:#263347; color:#fff; padding:11px 14px; border-radius:7px; box-shadow:0 6px 24px #17243a33; font-size:13px; }
+    @media(max-width:850px) {
+      #orchestration-rule-mockup .app { grid-template-columns:1fr; }
+      #orchestration-rule-mockup aside { padding:11px; border-right:0; border-bottom:1px solid #26344a; }
+      #orchestration-rule-mockup .brand { padding:0 8px 9px; }
+      #orchestration-rule-mockup .profile { display:none; }
+      #orchestration-rule-mockup .content { padding:18px 14px; }
+      #orchestration-rule-mockup .filters, #orchestration-rule-mockup .ai-upload { flex-wrap:wrap; display:flex; }
+      #orchestration-rule-mockup .row { grid-template-columns:1fr; }
+      #orchestration-rule-mockup .row.head { display:none; }
+      #orchestration-rule-mockup .manual-entry { grid-template-columns:1fr; }
+    }
+  </style>
+  <div class="app">
+    <aside>
+      <div class="brand">TestPilot</div>
+      <nav><button type="button">⌂ 概览</button><button type="button">◷ 自动化任务</button><button type="button" class="active">▤ 编排规则库</button><button type="button">⚙ 设置</button></nav>
+      <div class="profile">李红峰　⌄<div style="font-size:12px;color:#8f9caf;margin-top:4px">管理员</div></div>
+    </aside>
+    <main class="main">
+      <div class="topbar"><span>工作台 / 编排规则库</span><span>?</span></div>
+      <section class="content" id="rule-list-view">
+        <div class="filters">
+          <label>场景名称<input id="filter-name" placeholder="搜索场景名称"></label>
+          <label>创建人<select id="filter-owner"><option value="">全部用户</option><option>我</option><option>张三</option><option>王五</option></select></label>
+          <button class="btn" type="button" data-action="filter">查询</button>
+          <button class="btn" type="button" data-action="reset-filter">重置</button>
+        </div>
+        <div class="list-head"><span style="color:#526073;font-size:13px">编排规则</span><button class="btn primary" type="button" data-action="new">＋ 新建编排规则</button></div>
+        <div class="list">
+          <div class="row head"><span>场景名称 / 规则名称</span><span>接口数</span><span>创建人</span><span>更新时间与操作</span></div>
+          <div class="row rule-row" data-kind="user-detail" data-name="创建用户并查询详情" data-owner="我"><div><div class="rule-name">创建用户并查询详情</div><div class="meta">POST /api/users → GET /api/users/{id}</div></div><span>2 个接口</span><span>我</span><div><div class="meta">2026-10-19 10:24</div><div class="actions"><button class="btn link" data-action="view" type="button">查看</button><button class="btn link" data-action="edit" type="button">编辑</button><button class="btn link" data-action="copy" type="button">复制</button><button class="btn link danger" data-action="delete" type="button">删除</button></div></div></div>
+          <div class="row rule-row" data-kind="user-orders" data-name="查询用户订单" data-owner="张三"><div><div class="rule-name">查询用户订单</div><div class="meta">GET /api/users/{id}/orders</div></div><span>1 个接口</span><span>张三</span><div><div class="meta">2026-10-18 16:08</div><div class="actions"><button class="btn link" data-action="view" type="button">查看</button><button class="btn link locked" type="button" disabled title="只能编辑自己创建的编排规则">编辑</button><button class="btn link" data-action="copy" type="button">复制</button><button class="btn link locked" type="button" disabled title="只能删除自己创建的编排规则">删除</button></div></div></div>
+          <div class="row rule-row" data-kind="register-permission" data-name="用户注册及权限校验" data-owner="王五"><div><div class="rule-name">用户注册及权限校验</div><div class="meta">POST /api/register → POST /api/login → GET /api/permissions</div></div><span>3 个接口</span><span>王五</span><div><div class="meta">2026-10-17 09:42</div><div class="actions"><button class="btn link" data-action="view" type="button">查看</button><button class="btn link locked" type="button" disabled title="只能编辑自己创建的编排规则">编辑</button><button class="btn link" data-action="copy" type="button">复制</button><button class="btn link locked" type="button" disabled title="只能删除自己创建的编排规则">删除</button></div></div></div>
+        </div>
+        <div class="pagefoot">共 3 条规则</div>
+      </section>
+
+      <section class="content" id="rule-editor-view" hidden>
+        <button class="back" type="button" data-action="back">← 返回规则列表</button>
+        <div class="panel-head"><h1 id="editor-title">新建编排规则</h1></div>
+        <div class="panel" style="margin-top:0">
+          <div class="basics">
+            <label class="field-label">场景名称<input id="scene-name" placeholder="例如：创建用户并查询详情"></label>
+            <label class="field-label">规则说明<input id="rule-description" placeholder="可选，描述该场景的业务目标"></label>
+          </div>
+          <div class="section-title"><h2>接口来源</h2><small>可以手动添加接口，也可以上传已有测试用例交由 AI 分析</small></div>
+          <div class="source-tabs"><button class="active" type="button" data-source-tab="manual">手动录入接口</button><button type="button" data-source-tab="upload">上传测试用例 · AI 分析</button></div>
+          <div class="source-panel" id="manual-panel" style="margin-top:10px">
+            <p class="entry-help">录入接口后添加到编排步骤，再拖拽调整调用顺序。</p>
+            <div class="manual-entry">
+              <label class="field-label">请求方法<select id="api-method"><option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option></select></label>
+              <label class="field-label">接口 URL<input id="api-url" placeholder="/api/resource/{id}"></label>
+              <label class="field-label">入参说明<input id="api-params" placeholder="例如：path.id 使用上一步响应中的 id"></label>
+              <button class="btn" type="button" data-action="add-api">添加接口</button>
+            </div>
+          </div>
+          <div class="source-panel" id="upload-panel" style="margin-top:10px" hidden>
+            <p class="entry-help">上传接口测试用例，AI 将分析请求顺序、变量传递和场景名称；分析结果可继续调整或补充。</p>
+            <div class="ai-upload"><label class="field-label">测试用例文件<input id="case-file" type="file" accept=".json,.yaml,.yml,.csv,.xlsx,.feature,.txt"></label><button class="btn" type="button" data-action="analyze">AI 分析编排规则</button></div>
+            <div class="upload-note" id="upload-status">支持 JSON、YAML、CSV、Excel、Feature 等测试用例文件</div>
+          </div>
+
+          <div class="section-title"><h2>编排步骤</h2><small>拖动 ⠿ 调整顺序；可继续手动添加接口</small></div>
+          <div class="flow-box">
+            <div class="flow-head"><strong>接口调用顺序</strong><small id="step-count">0 个步骤</small></div>
+            <div class="step-list" id="step-list"><div class="empty-steps" id="empty-steps">添加接口或分析测试用例后，在这里编排场景</div></div>
+          </div>
+          <div class="editor-footer"><small id="edit-hint">场景名称同时作为编排规则名称</small><div style="display:flex;gap:9px"><button class="btn" type="button" data-action="cancel">取消</button><button class="btn primary" type="button" data-action="save">保存编排规则</button></div></div>
+        </div>
+      </section>
+
+      <section class="content" id="rule-detail-view" hidden>
+        <button class="back" type="button" data-action="back">← 返回规则列表</button>
+        <div class="panel-head"><h1 id="detail-name">创建用户并查询详情</h1></div>
+        <div class="detail-card"><div class="detail-title">规则信息</div><div class="detail-body"><div id="detail-description">创建用户后，使用响应中的用户 ID 查询详情。</div><div class="meta" style="margin-top:10px">创建人：<span id="detail-owner">我</span>　·　2 个接口</div></div></div>
+        <div class="detail-card"><div class="detail-title">编排步骤</div><div class="detail-body" id="detail-steps"><div class="detail-step"><b>1</b><div><span class="method post">POST</span>/api/users<small class="meta">入参：name 使用参数集变量</small></div></div><div class="detail-step"><b>2</b><div><span class="method">GET</span>/api/users/{id}<small class="meta">入参：id 取自步骤 1 响应 $.id</small></div></div></div></div>
+      </section>
+      <section class="content" id="rule-delete-view" hidden>
+        <button class="back" type="button" data-action="back">← 返回规则列表</button>
+        <div class="panel-head"><h1>删除编排规则</h1></div>
+        <div class="panel" style="margin-top:0;max-width:680px">
+          <h2 id="delete-rule-name">创建用户并查询详情</h2>
+          <p style="color:#687486;line-height:1.7">确定删除这条编排规则吗？删除后将无法从规则库中选择它。</p>
+          <div class="editor-footer"><small>此操作只影响规则库中的这条规则。</small><div style="display:flex;gap:9px"><button class="btn" type="button" data-action="cancel-delete">取消</button><button class="btn danger" type="button" data-action="confirm-delete">确认删除</button></div></div>
+        </div>
+      </section>
+      <div class="toast" id="toast" hidden></div>
+    </main>
+  </div>
+  <script>
+    const root = document.getElementById("orchestration-rule-mockup");
+    const listView = root.querySelector("#rule-list-view");
+    const editorView = root.querySelector("#rule-editor-view");
+    const detailView = root.querySelector("#rule-detail-view");
+    const deleteView = root.querySelector("#rule-delete-view");
+    const stepList = root.querySelector("#step-list");
+    const toast = root.querySelector("#toast");
+    let draggedStep = null;
+    let editMode = "new";
+    let selectedRow = null;
+    let deleteTarget = null;
+    let sourceTab = "manual";
+    const rulePresets = {
+      "user-detail": [
+        ["POST", "/api/users", "入参：name 使用参数集变量"],
+        ["GET", "/api/users/{id}", "入参：id 取自步骤 1 响应 $.id"]
+      ],
+      "user-orders": [["GET", "/api/users/{id}/orders", "入参：id 来自场景公共变量 userId"]],
+      "register-permission": [
+        ["POST", "/api/register", "入参：username、password 来自参数集"],
+        ["POST", "/api/login", "入参：username、password 使用注册步骤数据"],
+        ["GET", "/api/permissions", "入参：token 取自登录响应"]
+      ]
+    };
+    const ruleDescriptions = {
+      "user-detail": "创建用户后，使用响应中的用户 ID 查询详情。",
+      "user-orders": "根据用户 ID 查询该用户的订单列表。",
+      "register-permission": "注册并登录用户，随后检查权限接口返回。"
+    };
+    function notify(message) { toast.textContent = message; toast.hidden = false; setTimeout(() => toast.hidden = true, 2200); }
+    function show(view) { listView.hidden = view !== "list"; editorView.hidden = view !== "editor"; detailView.hidden = view !== "detail"; deleteView.hidden = view !== "delete"; }
+    function updateSteps() {
+      const rows = [...stepList.querySelectorAll(".step")];
+      root.querySelector("#empty-steps").hidden = rows.length > 0;
+      rows.forEach((row, index) => row.querySelector(".step-num").textContent = String(index + 1));
+      root.querySelector("#step-count").textContent = `${rows.length} 个步骤`;
+    }
+    function makeStep(method, url, params = "") {
+      const row = document.createElement("div"); row.className = "step"; row.draggable = true;
+      row.innerHTML = `<span class="grip" aria-label="拖动排序">⠿</span><span class="step-num"></span><div class="step-main"><div><span class="method"></span><code></code></div><small></small></div><button class="step-remove" type="button" aria-label="移除步骤">×</button>`;
+      row.querySelector(".method").textContent = method;
+      if (method === "POST") row.querySelector(".method").classList.add("post");
+      row.querySelector("code").textContent = url;
+      row.querySelector("small").textContent = params || "入参：可在此补充参数映射";
+      row.querySelector(".step-remove").addEventListener("click", () => { row.remove(); updateSteps(); });
+      stepList.append(row); updateSteps();
+    }
+    function seedSteps() { stepList.querySelectorAll(".step").forEach((row) => row.remove()); updateSteps(); }
+    function openEditor(mode, row = null) {
+      editMode = mode; selectedRow = row; seedSteps();
+      root.querySelector("#editor-title").textContent = mode === "new" ? "新建编排规则" : mode === "copy" ? "复制编排规则" : "编辑编排规则";
+      root.querySelector("#scene-name").value = mode === "edit" ? row.dataset.name : "";
+      root.querySelector("#rule-description").value = mode === "new" ? "" : (ruleDescriptions[row?.dataset.kind] || "");
+      root.querySelector("#edit-hint").textContent = mode === "copy" ? "已带入原规则的接口顺序，可继续修改；请填写新的场景名称。" : "场景名称同时作为编排规则名称";
+      if (mode === "copy" || mode === "edit") (rulePresets[row?.dataset.kind] || []).forEach(([method, url, params]) => makeStep(method, url, params));
+      show("editor");
+    }
+    function filterRows() {
+      const name = root.querySelector("#filter-name").value.trim().toLocaleLowerCase();
+      const owner = root.querySelector("#filter-owner").value;
+      root.querySelectorAll(".rule-row").forEach((row) => {
+        row.hidden = !(row.dataset.name.toLocaleLowerCase().includes(name) && (!owner || row.dataset.owner === owner));
+      });
+    }
+    function switchSource(name) {
+      sourceTab = name;
+      root.querySelectorAll("[data-source-tab]").forEach((button) => button.classList.toggle("active", button.dataset.sourceTab === name));
+      root.querySelector("#manual-panel").hidden = name !== "manual";
+      root.querySelector("#upload-panel").hidden = name !== "upload";
+    }
+    root.addEventListener("click", (event) => {
+      const sourceButton = event.target.closest("[data-source-tab]");
+      if (sourceButton) { switchSource(sourceButton.dataset.sourceTab); return; }
+      const action = event.target.closest("[data-action]")?.dataset.action;
+      const row = event.target.closest(".rule-row");
+      if (action === "new") openEditor("new");
+      if (action === "back" || action === "cancel") show("list");
+      if (action === "view") {
+        root.querySelector("#detail-name").textContent = row.dataset.name;
+        root.querySelector("#detail-owner").textContent = row.dataset.owner;
+        root.querySelector("#detail-description").textContent = ruleDescriptions[row.dataset.kind] || "";
+        const detailSteps = root.querySelector("#detail-steps"); detailSteps.replaceChildren();
+        (rulePresets[row.dataset.kind] || []).forEach(([method, url, params], index) => {
+          const item = document.createElement("div"); item.className = "detail-step";
+          const number = document.createElement("b"); number.textContent = String(index + 1);
+          const body = document.createElement("div");
+          const verb = document.createElement("span"); verb.className = `method${method === "POST" ? " post" : ""}`; verb.textContent = method;
+          body.append(verb, document.createTextNode(url));
+          const note = document.createElement("small"); note.className = "meta"; note.textContent = params;
+          body.append(note); item.append(number, body); detailSteps.append(item);
+        });
+        show("detail");
+      }
+      if (action === "edit" && row?.dataset.owner === "我") openEditor("edit", row);
+      if (action === "copy") openEditor("copy", row);
+      if (action === "delete" && row?.dataset.owner === "我") { deleteTarget = row; root.querySelector("#delete-rule-name").textContent = row.dataset.name; show("delete"); }
+      if (action === "cancel-delete") show("list");
+      if (action === "confirm-delete" && deleteTarget) { deleteTarget.remove(); deleteTarget = null; root.querySelector(".pagefoot").textContent = `共 ${root.querySelectorAll(".rule-row").length} 条规则`; show("list"); notify("编排规则已删除"); }
+      if (action === "add-api") {
+        const url = root.querySelector("#api-url").value.trim();
+        if (!url) { notify("请填写接口 URL"); return; }
+        makeStep(root.querySelector("#api-method").value, url, root.querySelector("#api-params").value.trim());
+        root.querySelector("#api-url").value = ""; root.querySelector("#api-params").value = "";
+      }
+      if (action === "analyze") {
+        if (!root.querySelector("#case-file").files.length) { notify("请先上传测试用例文件"); return; }
+        root.querySelector("#upload-status").textContent = "AI 分析完成 · 已生成 3 个候选接口步骤，可拖拽排序或手动补充";
+        makeStep("POST", "/api/users", "AI 识别：name 来自测试数据");
+        makeStep("GET", "/api/users/{id}", "AI 识别：id 取自步骤 1 响应 $.id");
+        makeStep("GET", "/api/users/{id}/orders", "AI 识别：id 取自步骤 1 响应 $.id");
+      }
+      if (action === "save") {
+        if (!root.querySelector("#scene-name").value.trim()) { notify("请填写场景名称"); return; }
+        if (!stepList.querySelector(".step")) { notify("请添加或分析至少一个接口步骤"); return; }
+        notify("编排规则已保存"); show("list");
+      }
+      if (action === "filter") filterRows();
+      if (action === "reset-filter") { root.querySelector("#filter-name").value = ""; root.querySelector("#filter-owner").value = ""; filterRows(); }
+    });
+    root.querySelector("#case-file").addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) root.querySelector("#upload-status").textContent = `已选择：${file.name} · 点击“AI 分析编排规则”开始分析`;
+    });
+    root.addEventListener("dragstart", (event) => {
+      const row = event.target.closest(".step");
+      if (!row) return;
+      draggedStep = row; row.classList.add("dragging"); event.dataTransfer.effectAllowed = "move"; event.dataTransfer.setData("text/plain", "rule-step");
+    });
+    root.addEventListener("dragover", (event) => {
+      const target = event.target.closest(".step");
+      if (!draggedStep || !target || target === draggedStep) return;
+      event.preventDefault(); target.classList.add("drag-target");
+    });
+    root.addEventListener("drop", (event) => {
+      const target = event.target.closest(".step");
+      if (!draggedStep || !target || target === draggedStep) return;
+      event.preventDefault();
+      const after = event.clientY > target.getBoundingClientRect().top + target.offsetHeight / 2;
+      stepList.insertBefore(draggedStep, after ? target.nextSibling : target); updateSteps();
+    });
+    root.addEventListener("dragend", () => { draggedStep?.classList.remove("dragging"); draggedStep = null; root.querySelectorAll(".step.drag-target").forEach((row) => row.classList.remove("drag-target")); });
+  </script>
+</div>

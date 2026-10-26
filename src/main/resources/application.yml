@@ -1,0 +1,92 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: testpilot
+
+  # ===== PostgreSQL（Docker Compose 提供）=====
+  datasource:
+    url: jdbc:postgresql://localhost:5432/testpilot
+    username: testpilot
+    password: testpilot
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 5
+      connection-timeout: 30000
+      max-lifetime: 1800000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+
+  # ===== Spring AI：DeepSeek OpenAI 兼容 Chat API =====
+  ai:
+    openai:
+      api-key: ${DEEPSEEK_API_KEY:dummy-key}
+      base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com}
+      chat:
+        options:
+          model: ${DEEPSEEK_CHAT_MODEL:deepseek-v4-pro}
+          temperature: 0.2
+      embedding:
+        # Embeddings use a separate OpenAI-compatible endpoint/key; DeepSeek chat credentials are not reused.
+        base-url: ${EMBEDDING_BASE_URL:https://api.openai.com}
+        api-key: ${EMBEDDING_API_KEY:dummy-key}
+        options:
+          model: ${EMBEDDING_MODEL:text-embedding-3-small}
+          dimensions: ${EMBEDDING_DIMENSIONS:1536}
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        table-name: testpilot_rule_vectors
+        dimensions: ${EMBEDDING_DIMENSIONS:1536}
+        distance-type: COSINE_DISTANCE
+        index-type: HNSW
+# ===== TestPilot 自定义配置 =====
+testpilot:
+  rules:
+    recommendation:
+      similarity-threshold: ${RULE_RECOMMENDATION_SIMILARITY_THRESHOLD:0.70}
+      max-results: ${RULE_RECOMMENDATION_MAX_RESULTS:8}
+  # 登录态（无状态 JWT）。secret 生产环境务必用环境变量覆盖
+  jwt:
+    secret: ${TESTPILOT_JWT_SECRET:testpilot-local-dev-secret-key-change-me-in-production-0123456789}
+    expire-hours: 24
+  # 硬编码管理员账号（本期简化，后续再做运营后台）
+  admin:
+    username: admin
+    password: 666666
+  # 异步线程池 + 浏览器并发闸门
+  async:
+    core-pool-size: 10
+    max-pool-size: 30
+    queue-capacity: 100
+    max-browser-concurrency: 6
+  # 新任务默认使用 Chrome DevTools MCP；旧任务仍使用其记录的 Provider。
+  browser:
+    provider: chrome-devtools-mcp
+    command: npx
+    # 参数必须是 @playwright/mcp 真实支持的开关（--disable-gpu / --js-flags 等会让进程直接退出，
+    # 表现为 MCP 握手超时）。版本固定，避免 latest 每次重新解析导致启动变慢或行为漂移。
+    args: >-
+      -y,@playwright/mcp@0.0.83,--headless,--isolated,--no-sandbox,
+      --image-responses,omit,--browser,chrome
+    chrome-command: npx
+    # 固定 MCP 版本；请求会在每次页面操作后增量采集，并在录制结束时再次完整回捞。
+    chrome-args: >-
+      -y,chrome-devtools-mcp@1.11.0,--headless,--isolated,
+      --no-usage-statistics,--no-performance-crux,--redactNetworkHeaders,
+      --maxNavigationSaved=25
+  # 自动化平台同步地址；默认提供本地 mock endpoint
+  platform:
+    sync-url: ${TESTPILOT_PLATFORM_SYNC_URL:http://localhost:8080/openapi/mock/cases}
+
+logging:
+  level:
+    com.testpilot: INFO
